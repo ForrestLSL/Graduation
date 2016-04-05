@@ -1,4 +1,4 @@
-package com.lsl.graduation.net;
+package com.lsl.graduation.http.net;
 
 /**
  * 关于Http请求回调接口

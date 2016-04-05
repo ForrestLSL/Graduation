@@ -1,4 +1,4 @@
-package com.lsl.graduation.net;
+package com.lsl.graduation.http.net;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -25,7 +25,7 @@ public interface IHttpManger {
      * @return
      * @throws IOException
      */
-    public abstract HttpResponse excuteHttpGet(String url, Map<String, String> parameters, Map<String, String> headers)throws IOException;
+    HttpResponse excuteHttpGet(String url, Map<String, String> parameters, Map<String, String> headers)throws IOException;
     /***
      *  返回Http应答,若不是200,则将抛出异常
      * @param url
@@ -34,8 +34,8 @@ public interface IHttpManger {
      * @return
      * @throws IOException
      */
-    public abstract HttpResponse excuteHttpPost(String url, Map<String, String> parameters, Map<String, String> headers)throws IOException;
-    public abstract DefaultHttpClient getHttpClient(boolean isHttps);
+    HttpResponse excuteHttpPost(String url, Map<String, String> parameters, Map<String, String> headers)throws IOException;
+    DefaultHttpClient getHttpClient(boolean isHttps);
     /**
      * Http应答的便捷方法,如果Http返回的不是200也将抛出异常
      *
@@ -43,7 +43,7 @@ public interface IHttpManger {
      * @return
      * @throws IOException
      */
-    public abstract InputStream getInputStream(String url)throws IOException;
+    InputStream getInputStream(String url)throws IOException;
 
     /***
      * getInputStream的便捷方法,直接获得文本资源。
@@ -51,7 +51,7 @@ public interface IHttpManger {
      * @return
      * @throws IOException
      */
-    public abstract String getHttpText(String url)throws IOException;
+    String getHttpText(String url)throws IOException;
 
-    public abstract HttpURLConnection getHttpUrlConnection(String url)throws IOException;
+    HttpURLConnection getHttpUrlConnection(String url)throws IOException;
 }

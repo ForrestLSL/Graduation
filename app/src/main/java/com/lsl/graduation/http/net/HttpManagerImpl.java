@@ -1,4 +1,5 @@
-package com.lsl.graduation.net;
+package com.lsl.graduation.http.net;
+import com.lsl.graduation.Configs;
 import com.lsl.graduation.utils.MLog;
 
 import org.apache.http.Header;
@@ -11,7 +12,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -31,12 +31,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -47,13 +44,11 @@ import java.util.zip.GZIPInputStream;
  */
     class HttpManagerImpl implements   IHttpManger {
     private static final HttpParams defaultParams;
-    public final static int CONNECTION_TIMEOUT = 15 * 1000;
-    public final static int SO_TIMEOUT = 15 * 1000;
     static {
         defaultParams=new BasicHttpParams();
         // 设置连接超时和 Socket 超时，
-        HttpConnectionParams.setConnectionTimeout(defaultParams,CONNECTION_TIMEOUT);
-        HttpConnectionParams.setSoTimeout(defaultParams,SO_TIMEOUT);
+        HttpConnectionParams.setConnectionTimeout(defaultParams, Configs.CONNECTION_TIMEOUT);
+        HttpConnectionParams.setSoTimeout(defaultParams,Configs.SO_TIMEOUT);
 
     }
 
@@ -63,14 +58,7 @@ import java.util.zip.GZIPInputStream;
         HttpResponse response;
         response=httpClient.execute(httpGet(url,parameters,headers));
         validResponse(response);
-        //将得到的数据打印并将返回的数据格式化为utf-8的形式
-        String body = null;
-        try {
-            body = EntityUtils.toString(response.getEntity(), "utf-8");
-            MLog.i("请求服务器端成功=>\n" + body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         return response;
     }
 
@@ -80,13 +68,7 @@ import java.util.zip.GZIPInputStream;
         HttpResponse response;
         response = httpClient.execute(getHttpPost(url, parameters, headers));
         validResponse(response);
-        String body = null;
-        try {
-            body = EntityUtils.toString(response.getEntity(), "utf-8");
-            MLog.i("请求服务器端成功=>\n" + body);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         return response;
     }
 
@@ -257,7 +239,7 @@ import java.util.zip.GZIPInputStream;
         return httpGet;
     }
     /** 判断是否成功返回*/
-    private HttpResponse validResponse(HttpResponse response)throws IOException,ClientProtocolException{
+    private HttpResponse validResponse(HttpResponse response)throws IOException {
         if (response.getStatusLine().getStatusCode()!=HttpStatus.SC_OK&&response.getStatusLine().getStatusCode()!=HttpStatus.SC_NO_CONTENT){
 
             throw new IOException("response Code:"
@@ -274,7 +256,6 @@ import java.util.zip.GZIPInputStream;
         if (parameters != null) {
             for (String key : parameters.keySet()) {
                 params.add(new BasicNameValuePair(key, parameters.get(key)));
-                MLog.i("上传参数:"+key+"====="+parameters.get(key));
             }
         }
 //        String curtime = Long.toString(System.currentTimeMillis());
@@ -308,7 +289,7 @@ import java.util.zip.GZIPInputStream;
         return httpPost;
     }
      private HttpURLConnection getUrlConnection(String url)
-            throws MalformedURLException, IOException, ProtocolException {
+            throws IOException {
         URL httpUrl = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) httpUrl
                 .openConnection();
@@ -321,8 +302,8 @@ import java.util.zip.GZIPInputStream;
         // connection = (HttpURLConnection) httpUrl.openConnection();
         // unsetProxy();
         // }
-        connection.setConnectTimeout(CONNECTION_TIMEOUT);
-        connection.setReadTimeout(SO_TIMEOUT);
+        connection.setConnectTimeout(Configs.CONNECTION_TIMEOUT);
+        connection.setReadTimeout(Configs.SO_TIMEOUT);
         connection.setDoInput(true);
         connection.setUseCaches(false);
         connection.setRequestMethod("GET");

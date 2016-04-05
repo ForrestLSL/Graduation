@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.lsl.graduation.net.HttpManager;
+import com.lsl.graduation.http.context.LoadContext;
+import com.lsl.graduation.http.context.StringContext;
+import com.lsl.graduation.http.loadlistener.SimpleLoadListener;
+import com.lsl.graduation.http.net.HttpManager;
 
 import org.apache.http.HttpResponse;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.logging.Handler;
 
 import javax.xml.transform.Result;
 
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         button= (Button) findViewById(R.id.button);
         textView= (TextView) findViewById(R.id.text);
+        Configs.Init(this);
+        getHoSaVenue();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,5 +57,28 @@ public class MainActivity extends AppCompatActivity {
                 }.execute();
             }
         });
+
+    }
+    private void getHoSaVenue(){
+        new StringContext().flag(LoadContext.FLAG_HTTP_FIRST).post("http://123.56.162.207:8093/hosapro/hsvenue/findPageVenue")
+                .param("rows", "10")
+                .param("page","1")
+                .param("xzb","116.403875")
+                .param("yzb","39.915168")
+                .listener(new SimpleLoadListener<String>() {
+                    @Override
+                    public void loadComplete(LoadContext<String> context) {
+                        super.loadComplete(context);
+
+                        JSONObject resqponse;
+                        try {
+                            resqponse = new JSONObject(context.getResult());
+                            String total=resqponse.getString("total");
+                            textView.setText("返回结果"+total);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).load();
     }
 }

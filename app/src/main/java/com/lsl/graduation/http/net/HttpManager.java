@@ -1,4 +1,4 @@
-package com.lsl.graduation.net;
+package com.lsl.graduation.http.net;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.DefaultHttpClient;
