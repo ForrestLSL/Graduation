@@ -49,7 +49,7 @@ public class NetLoadCallable<Result> implements Callable<Result> {
 		context.setResult(r);
 		if (null != context.getListener()
 				&& context.getListener() instanceof LoadListener) {
-			((LoadListener<Result>) context.getListener()).postExecut(context);
+			context.getListener().postExecut(context);
 		}
 		return r;
 	}

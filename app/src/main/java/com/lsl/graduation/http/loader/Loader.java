@@ -19,28 +19,28 @@ public interface Loader {
 	 * 
 	 * @param context
 	 */
-	public <Result> void onPreLoad(LoadContext<Result> context);
+	<Result> void onPreLoad(LoadContext<Result> context);
 	
 	/**
 	 * 发起载入的异步请求。
 	 * 
 	 * @param context
 	 */
-	public <Result> void startLoading(LoadContext<Result> context);
+	<Result> void startLoading(LoadContext<Result> context);
 
 	/**
 	 * 完成加载请求
 	 * 
 	 * @param context
 	 */
-	public <Result> void onPostLoad(LoadContext<Result> context);
+	<Result> void onPostLoad(LoadContext<Result> context);
 	
 	/**
 	 * 取消该上下文的任务
 	 * 
 	 * @param context
 	 */
-	public <Result> boolean cancelLoading(LoadContext<Result> context);
+	<Result> boolean cancelLoading(LoadContext<Result> context);
 
 	/**
 	 * 破坏Loader。终止所有异步线程和任务
@@ -48,5 +48,5 @@ public interface Loader {
 	 * @param now
 	 *            指示是否希望立即破坏。(当有任务正在执行时若设置为now则应尝试中断)
 	 */
-	public void destroy(boolean now);
+	void destroy(boolean now);
 }
