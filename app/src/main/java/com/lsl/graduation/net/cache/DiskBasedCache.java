@@ -153,13 +153,14 @@ public class DiskBasedCache implements Cache {
      */
     @Override
     public synchronized void initialize() {
+        // if don't exists then mkdirs
         if (!mRootDirectory.exists()) {
             if (!mRootDirectory.mkdirs()) {
                 MLog.e( "Unable to create cache dir  " + mRootDirectory.getAbsolutePath());
             }
             return;
         }
-
+        //if exists ,read it again
         File[] files = mRootDirectory.listFiles();
         if (files == null) {
             return;
@@ -168,17 +169,17 @@ public class DiskBasedCache implements Cache {
             FileInputStream fis = null;
             try {
                 fis = new FileInputStream(file);
-                CacheHeader entry = CacheHeader.readHeader(fis);
-                entry.size = file.length();
+                CacheHeader entry = CacheHeader.readHeader(fis);//read header
+                entry.size = file.length();//read the length of file
                 putEntry(entry.key, entry);
             } catch (IOException e) {
                 if (file != null) {
-                    file.delete();
+                    file.delete();// delete the file
                 }
             } finally {
                 try {
                     if (fis != null) {
-                        fis.close();
+                        fis.close();// close the stream
                     }
                 } catch (IOException ignored) {
                 }

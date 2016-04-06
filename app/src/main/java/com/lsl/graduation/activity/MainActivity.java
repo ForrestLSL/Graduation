@@ -1,4 +1,4 @@
-package com.lsl.graduation;
+package com.lsl.graduation.activity;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.lsl.graduation.Configs;
+import com.lsl.graduation.R;
 import com.lsl.graduation.net.context.LoadContext;
 import com.lsl.graduation.net.context.StringContext;
 import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
@@ -20,7 +22,7 @@ import java.io.IOException;
 
 import javax.xml.transform.Result;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private Button button;
     private TextView textView;
     private HttpResponse response;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         textView= (TextView) findViewById(R.id.text);
         Configs.Init(this);
         getHoSaVenue();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void getHoSaVenue(){
+        showDialog();
         new StringContext().flag(LoadContext.FLAG_HTTP_FIRST).post("http://123.56.162.207:8093/hosapro/hsvenue/findPageVenue")
                 .param("rows", "10")
                 .param("page","1")
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void loadComplete(LoadContext<String> context) {
                         super.loadComplete(context);
-
+                        dismissDialog();
                         JSONObject resqponse;
                         try {
                             resqponse = new JSONObject(context.getResult());
