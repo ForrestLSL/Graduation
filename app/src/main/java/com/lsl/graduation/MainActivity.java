@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.lsl.graduation.http.context.LoadContext;
-import com.lsl.graduation.http.context.StringContext;
-import com.lsl.graduation.http.loadlistener.SimpleLoadListener;
-import com.lsl.graduation.http.net.HttpManager;
+import com.lsl.graduation.net.context.LoadContext;
+import com.lsl.graduation.net.context.StringContext;
+import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
+import com.lsl.graduation.net.http.HttpManager;
 
 import org.apache.http.HttpResponse;
 import org.json.JSONException;
