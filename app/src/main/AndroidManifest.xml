@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:name=".AppContext"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

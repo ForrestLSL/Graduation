@@ -1,10 +1,17 @@
 package com.lsl.graduation.activity;
 
 import android.os.AsyncTask;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lsl.graduation.Configs;
@@ -13,55 +20,111 @@ import com.lsl.graduation.net.context.LoadContext;
 import com.lsl.graduation.net.context.StringContext;
 import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
 import com.lsl.graduation.net.http.HttpManager;
+import com.lsl.graduation.utils.UIHelper;
+import com.lsl.graduation.widget.Title;
+import com.lsl.graduation.widget.slide.NavigationDrawerItem;
+import com.lsl.graduation.widget.slide.NavigationDrawerView;
 
 import org.apache.http.HttpResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.transform.Result;
 
-public class MainActivity extends BaseActivity {
-    private Button button;
-    private TextView textView;
-    private HttpResponse response;
-
+public class MainActivity extends BaseActivity implements View.OnClickListener{
+    /**  侧滑菜单控件*/
+    private DrawerLayout drawerLayout;
+    /** 侧滑菜单中的ListView*/
+    private NavigationDrawerView navigationDrawerList;
+    /** 侧滑菜单中的Item*/
+    private List<NavigationDrawerItem> navigationItems;
+    /** */
+    ListView leftDrawerListView;
+    /** 是否显示侧滑菜单*/
+    private boolean IsShow=true;
+    /** 包含整个侧滑菜单的布局*/
+    private LinearLayout linearDrawer;
+    /** 标题*/
+    private TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button= (Button) findViewById(R.id.button);
-        textView= (TextView) findViewById(R.id.text);
-        Configs.Init(this);
-        getHoSaVenue();
+        initView();
+    }
 
-        button.setOnClickListener(new View.OnClickListener() {
+    private void initView() {
+        findViewById(R.id.linear_left).setOnClickListener(this);
+        title= ((Title) findViewById(R.id.title)).title;//((HqTitle) findViewById(R.id.title)).title;
+        drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
+        linearDrawer= (LinearLayout) findViewById(R.id.linearDrawer);
+        navigationDrawerList= (NavigationDrawerView) findViewById(R.id.navigationDrawerList);
+        leftDrawerListView= (ListView) findViewById(R.id.leftDrawerListView);
+        // load data
+        navigationItems = new ArrayList<>();
+        navigationItems.add(new NavigationDrawerItem("One", true));
+        navigationItems.add(new NavigationDrawerItem("Two", true));
+        navigationItems.add(new NavigationDrawerItem("Three",true));
+        navigationItems.add(new NavigationDrawerItem("Four", true));
+        navigationDrawerList.replaceWith(navigationItems);
+        //add the List ItemClickListener
+        leftDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                new AsyncTask<Object,Object,Result>(){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (drawerLayout.isDrawerOpen(linearDrawer)) {
+                    drawerLayout.closeDrawer(linearDrawer);
 
-                    @Override
-                    protected Result doInBackground(Object... params) {
-                        try {
-                            response =HttpManager.executeHttpPost("https://www.baidu.com", null, null);
+                    selectItem(position);
+                }
+            }
+        });
+        // add the drawerListener ,监听drawer的显示隐藏
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
 
-                    @Override
-                    protected void onPostExecute(Result result) {
-                        super.onPostExecute(result);
-                        textView.setText("返回结果"+response.getEntity().toString());
-                    }
-                }.execute();
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                IsShow = !IsShow;
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                IsShow = !IsShow;
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
             }
         });
 
     }
+    private int currentSelectedPosition=0;
+    private void selectItem(int position) {
+        //设置选中和设置文字
+        if (leftDrawerListView != null) {
+            leftDrawerListView.setItemChecked(position, true);
+
+            navigationItems.get(currentSelectedPosition).setSelected(false);
+            navigationItems.get(position).setSelected(true);
+
+            currentSelectedPosition = position;
+            title.setText(navigationItems.get(position).getItemName());
+        }
+
+        if (linearDrawer != null) {
+            drawerLayout.closeDrawer(linearDrawer);
+        }
+    }
+
     private void getHoSaVenue(){
         showDialog();
         new StringContext().flag(LoadContext.FLAG_HTTP_FIRST).post("http://123.56.162.207:8093/hosapro/hsvenue/findPageVenue")
@@ -74,15 +137,30 @@ public class MainActivity extends BaseActivity {
                     public void loadComplete(LoadContext<String> context) {
                         super.loadComplete(context);
                         dismissDialog();
-                        JSONObject resqponse;
+                        JSONObject response;
                         try {
-                            resqponse = new JSONObject(context.getResult());
-                            String total=resqponse.getString("total");
-                            textView.setText("返回结果"+total);
+                            response = new JSONObject(context.getResult());
+                            String total=response.getString("total");
+                            UIHelper.showMsg(MainActivity.this,total);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 }).load();
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.linear_left:
+                if (IsShow){
+                    drawerLayout.openDrawer(linearDrawer);
+                }else {
+                    drawerLayout.closeDrawers();
+                }
+
+                break;
+        }
+    }
+
 }

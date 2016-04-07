@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title属性设置-->
+    <declare-styleable name="Title">
+        <attr name="text" format="string|reference" />
+        <attr name="text_color" format="string|reference" />
+        <attr name="res_left_btn" format="reference" />
+        <attr name="res_right_btn" format="reference" />
+        <attr name="text_left" format="string|reference"></attr>
+        <attr name="text_right" format="string|reference"></attr>
+        <attr name="text_margin_left" format="dimension|reference"></attr>
+        <attr name="text_margin_right" format="dimension|reference"></attr>
+    </declare-styleable>
+</resources>
