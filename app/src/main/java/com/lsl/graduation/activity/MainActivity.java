@@ -1,6 +1,9 @@
 package com.lsl.graduation.activity;
 
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +19,13 @@ import android.widget.TextView;
 
 import com.lsl.graduation.Configs;
 import com.lsl.graduation.R;
+import com.lsl.graduation.fragment.NewsFragment;
+import com.lsl.graduation.fragment.VideoFragment;
 import com.lsl.graduation.net.context.LoadContext;
 import com.lsl.graduation.net.context.StringContext;
 import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
 import com.lsl.graduation.net.http.HttpManager;
+import com.lsl.graduation.utils.ReflectUtil;
 import com.lsl.graduation.utils.UIHelper;
 import com.lsl.graduation.widget.Title;
 import com.lsl.graduation.widget.slide.NavigationDrawerItem;
@@ -66,8 +72,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         leftDrawerListView= (ListView) findViewById(R.id.leftDrawerListView);
         // load data
         navigationItems = new ArrayList<>();
-        navigationItems.add(new NavigationDrawerItem("One", true));
-        navigationItems.add(new NavigationDrawerItem("Two", true));
+        navigationItems.add(new NavigationDrawerItem("News", true));
+        navigationItems.add(new NavigationDrawerItem("Video", true));
         navigationItems.add(new NavigationDrawerItem("Three",true));
         navigationItems.add(new NavigationDrawerItem("Four", true));
         navigationDrawerList.replaceWith(navigationItems);
@@ -77,7 +83,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (drawerLayout.isDrawerOpen(linearDrawer)) {
                     drawerLayout.closeDrawer(linearDrawer);
-
+                    if (position==0){
+                        changeFragment(NewsFragment.class.getName());
+                    }else if (position==1){
+                        changeFragment(VideoFragment.class.getName());
+                    }
                     selectItem(position);
                 }
             }
@@ -161,6 +171,40 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
                 break;
         }
+    }
+    private static String nowFragmentName;
+
+    /**
+     *  工具类fragment之间的切换
+     * @param name
+     */
+    private void changeFragment(String name) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction();
+        Fragment nowFragment = fragmentManager
+                .findFragmentByTag(nowFragmentName);
+        if (nowFragment != null) {
+            fragmentTransaction.hide(nowFragment);
+        }
+        Fragment fragment = fragmentManager.findFragmentByTag(name);
+        if (fragment != null && fragment.isAdded()) {
+            fragmentTransaction.show(fragment);
+            fragment.onResume();
+        } else {
+            try {
+                fragment = (Fragment) ReflectUtil.getClass(name).newInstance();
+                fragmentTransaction.add(R.id.contentFrame, fragment, name);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        fragmentTransaction.commitAllowingStateLoss();
+        nowFragmentName = name;
     }
 
 }
