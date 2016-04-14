@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.lsl.graduation.utils.DeviceUtils;
+import com.lsl.graduation.db.SQLHelper;
 
 /**
  * Created by Forrest on 16/4/5.
@@ -16,7 +17,7 @@ public class AppContext extends Application {
     public static AppContext getInstance(){
         return instance;
     }
-
+    private SQLHelper sqlHelper;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,6 +34,12 @@ public class AppContext extends Application {
         NetworkInfo ni = cm.getActiveNetworkInfo();
 //		return ni != null && ni.isConnectedOrConnecting();
         return ni != null;
+    }
+    public SQLHelper getSqlHelper(){
+        if (sqlHelper==null){
+            sqlHelper=new SQLHelper(instance);
+        }
+        return sqlHelper;
     }
 
 }

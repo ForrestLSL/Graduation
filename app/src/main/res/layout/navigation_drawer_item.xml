@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:textColor="@color/color_3"
+            android:textColor="@color/indigo"
             android:textSize="@dimen/sp22"
             android:textStyle="normal"
             android:layout_centerVertical="true"

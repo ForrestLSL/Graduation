@@ -22,4 +22,10 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+    <!--频道Item的格式-->
+    <style name="tv_item">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textStyle"> bold</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

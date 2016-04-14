@@ -16,6 +16,7 @@ import com.lsl.graduation.utils.DialogUtils;
  * Created by Forrest on 16/4/6.
  */
 public class BaseActivity extends AppCompatActivity{
+    protected BaseActivity self=this;
     private Dialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

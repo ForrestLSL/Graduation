@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -61,6 +62,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        changeFragment(NewsFragment.class.getName());
+        selectItem(0);
     }
 
     private void initView() {
@@ -205,6 +208,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
         fragmentTransaction.commitAllowingStateLoss();
         nowFragmentName = name;
+    }
+    private long exitTime=0;
+
+    /***
+     *  退出程序
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK&&event.getAction()==KeyEvent.ACTION_DOWN){
+            if (System.currentTimeMillis()-exitTime>2000){
+                UIHelper.showMsg(this,"再按一次退出程序");
+                exitTime=System.currentTimeMillis();
+            }else System.exit(0);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }
