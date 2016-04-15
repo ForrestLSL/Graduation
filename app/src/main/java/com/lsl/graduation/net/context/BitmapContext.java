@@ -16,6 +16,7 @@ import com.lsl.graduation.net.parser.Parser;
 import com.lsl.graduation.utils.MLog;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
@@ -139,9 +140,7 @@ public class BitmapContext extends LoadContext<Bitmap> {
 		super.parser(parser);
 		return this;
 	}
-	
-	
-	
+
 	@Override
 	public void load() {
 		if(imageView == null){

@@ -46,7 +46,7 @@
             </LinearLayout>
         </LinearLayout>-->
 
-        <medusa.theone.waterdroplistview.view.WaterDropView
+        <com.lsl.graduation.widget.water.WaterDropView
             android:id="@+id/waterdroplist_waterdrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

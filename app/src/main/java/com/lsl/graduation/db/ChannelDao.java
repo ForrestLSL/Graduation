@@ -29,33 +29,34 @@ public class ChannelDao implements ChannelDaoInface {
         boolean flag = false;
         SQLiteDatabase database = null;
         long id = -1;
-        database = sqlHelper.getWritableDatabase();
-        database.beginTransaction();//开启事务
-        ContentValues values = new ContentValues();
-        java.lang.Class<? extends ChannelItem> clazz = item.getClass();
-        String tableName = clazz.getSimpleName();//返回类的名称
-        Method[] methods = clazz.getMethods();//返回该类的方法
         try {
+            database = sqlHelper.getWritableDatabase();
+            database.beginTransaction();
+            ContentValues values = new ContentValues();
+
+            java.lang.Class<? extends ChannelItem> clazz = item.getClass();
+
+            String tableNmae = clazz.getSimpleName();
+
+            Method[] methods = clazz.getMethods();
+
             for (Method method : methods) {
                 String mName = method.getName();
                 if (mName.startsWith("get") && !mName.startsWith("getClass")) {
-                    //截取3到name长度的字符即get后面的字段，并将其转换为小写
                     String fieldName = mName.substring(3, mName.length()).toLowerCase();
-                    Object value = method.invoke(item, null);
+                    Object value = method.invoke(item);
                     if (value instanceof String) {
-                           values.put(fieldName, (String) value);
+                        values.put(fieldName, (String) value);
                     }
                 }
             }
-            id = database.insert(tableName, null, values);
+            id = database.insert(tableNmae, null, values);
             flag = (id != -1 ? true : false);
             database.setTransactionSuccessful();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }finally {
-            if (database!=null){
+        } finally {
+            if (database != null) {
                 database.endTransaction();
                 database.close();
             }

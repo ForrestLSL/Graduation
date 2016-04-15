@@ -150,7 +150,7 @@ public class NewsFragment extends  BaseFragment implements View.OnClickListener{
     private void initFragment() {
         fragments.clear();
         for (int i = 0; i <userChannelLists.size(); i++) {
-            fragments.add(new VideoFragment());
+            fragments.add(new HeadFragment());
         }
         mAdapetr.appendList(fragments);
     }
