@@ -139,13 +139,13 @@ public class NewsDetailActivity extends  BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.new_img:
-                UIHelper.showMsg(NewsDetailActivity.this, "点击了视频播放");
+//                UIHelper.showMsg(NewsDetailActivity.this, "点击了视频播放");
                 Intent intent=new Intent();
                 intent.putExtra("newDetailModle", newDetailModle);
                 Class clazz=null;
                 if (!StringUtils.isEmpty(newDetailModle.getUrl_mp4())){
                     intent.putExtra("playUrl", newDetailModle.getUrl_mp4());
-//                    clazz=VideoPlayActivity.class;
+                    clazz=VideoPlayActivity.class;
 
                 }else {
                     clazz=ImageDetailActivity.class;

@@ -28,5 +28,5 @@
             android:textStyle="normal"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/navigationDrawerItemIconIV"
-            android:text="@string/app_name"/>
+            android:text="@string/app"/>
 </com.lsl.graduation.widget.slide.NavigationDrawerItemView>

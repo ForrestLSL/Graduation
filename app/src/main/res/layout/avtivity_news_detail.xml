@@ -22,7 +22,7 @@
         android:background="@color/color_e">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             >
             <TextView
                 android:id="@+id/new_title"
@@ -48,12 +48,13 @@
             <ImageView
                 android:id="@+id/new_img"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/new_time"
                 android:layout_marginTop="5dp"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:visibility="gone"
-                android:src="@mipmap/default_image" />
+                android:src="@mipmap/base_article_bigimage" />
 
             <com.lsl.graduation.widget.htmltext.HtmlTextView
                 android:id="@+id/wb_details"

@@ -13,8 +13,12 @@ import android.widget.TextView;
 import com.lsl.graduation.AppContext;
 import com.lsl.graduation.R;
 import com.lsl.graduation.net.context.BitmapContext;
+import com.lsl.graduation.utils.UIHelper;
 
 import java.util.List;
+
+import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by Forrest on 16/4/17.
@@ -46,10 +50,10 @@ public class ImageDetailAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View item= LayoutInflater.from(context).inflate(R.layout.image_item,null);
-//        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AppContext.deviceWidth*2/3);
-        ImageView img= (ImageView) item.findViewById(R.id.current_image);
-//        img.setLayoutParams(params);
-//        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, AppContext.deviceWidth*11/10);
+        PhotoView img= (PhotoView) item.findViewById(R.id.current_image);
+        img.setLayoutParams(params);
+        img.setScaleType(ImageView.ScaleType.FIT_CENTER);
         TextView text= (TextView) item.findViewById(R.id.current_page);
         new BitmapContext()
                 .get(imgList.get(position))
@@ -57,6 +61,13 @@ public class ImageDetailAdapter extends PagerAdapter{
                 .flag(BitmapContext.FLAG_CACHE_FIRST)
                 .defaultImage(context.getResources().getDrawable(R.mipmap.default_image)).load();
         text.setText((position + 1) + "/" + imgList.size());
+
+        img.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+            @Override
+            public void onPhotoTap(View view, float v, float v1) {
+//                UIHelper.showMsg(context,"点击了图片");
+            }
+        });
         container.addView(item);
         return item;
     }

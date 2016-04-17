@@ -47,7 +47,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:contentDescription="@string/app_name"
+                    android:contentDescription="@string/app"
                     android:src="@mipmap/my_photo_for_drawer"/>
 
                 <TextView

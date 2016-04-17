@@ -4,14 +4,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical" >
 
-    <ImageView
+    <uk.co.senab.photoview.PhotoView
         android:id="@+id/current_image"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/default_image" />
+        android:src="@mipmap/base_article_bigimage" />
 
     <TextView
         android:id="@+id/current_page"

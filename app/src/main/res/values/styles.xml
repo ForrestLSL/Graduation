@@ -39,6 +39,7 @@
     <style name="RiLo_CustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/activity_act</item>
     </style>
+
     <style name="activity_act" parent="@android:style/Animation.Activity">
         <item name="@android:activityOpenEnterAnimation">@anim/go_in</item>
 

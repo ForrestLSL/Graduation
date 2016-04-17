@@ -59,7 +59,7 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
 
     }
 
-    private void initData(final int page) {
+    private void initData( int page) {
         getMyActivity().showDialog();
         new StringContext().flag(LoadContext.FLAG_HTTP_FIRST).get(getNewUrl(page + ""))
                 .listener(new SimpleLoadListener<String>() {
@@ -75,9 +75,7 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
                     public void loadFail(LoadContext<String> context) {
                         super.loadFail(context);
                         getMyActivity().dismissDialog();
-                        if (page != 0) {
-                            index -= 20;
-                        }
+
                     }
                 }).load();
 
@@ -92,8 +90,8 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
             datas.clear();
 
         }
-        datas.addAll(list);
-        mAdapter.appendList(datas);
+//        datas.addAll(list);
+        mAdapter.appendList(list);
 
 //        UIHelper.showMsg(getMyActivity(),list.get(0).getTitle());
     }
