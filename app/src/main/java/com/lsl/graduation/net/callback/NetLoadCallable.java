@@ -54,6 +54,7 @@ public class NetLoadCallable<Result> implements Callable<Result> {
 
 	private Result loadHTTP() throws IOException, ParseException {
 		String param = context.getUrl();
+		MLog.d(param);//打印Url
 		HttpResponse response = null;
 		long duration = System.currentTimeMillis();
 		switch (context.getMethod()) {
@@ -74,7 +75,7 @@ public class NetLoadCallable<Result> implements Callable<Result> {
 			responseHeaders = convertHeaders(response.getAllHeaders());
 			if (response.getEntity() != null) {
 				responseContents = entityToBytes(response.getEntity());
-//				MLog.d(new String(responseContents));
+				MLog.d(new String(responseContents));
 			} else {
 				responseContents = new byte[0];
 			}
@@ -85,6 +86,7 @@ public class NetLoadCallable<Result> implements Callable<Result> {
 			MLog.d(((System.currentTimeMillis() - duration) / 1000) + "");
 			Cache.Entry entry = new Cache.Entry();
 			entry.data = responseContents;
+//			MLog.d("Graduation",responseContents.toString());
 			entry.responseHeaders = responseHeaders;
 			String headerValue = responseHeaders.get("Date");
 	        if (headerValue != null) {

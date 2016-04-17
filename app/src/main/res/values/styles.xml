@@ -35,4 +35,18 @@
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_margin">@dimen/dp3</item>
     </style>
+    <!-- 右进左出的Style-->
+    <style name="RiLo_CustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/activity_act</item>
+    </style>
+    <style name="activity_act" parent="@android:style/Animation.Activity">
+        <item name="@android:activityOpenEnterAnimation">@anim/go_in</item>
+
+        <item name="@android:activityOpenExitAnimation">@anim/go_in_alpha</item>
+
+        <item name="@android:activityCloseEnterAnimation">@anim/left_go_in</item>
+
+        <item name="@android:activityCloseExitAnimation">@anim/right_go_out</item>
+    </style>
+
 </resources>

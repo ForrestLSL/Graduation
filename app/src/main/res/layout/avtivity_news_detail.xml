@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.lsl.graduation.widget.Title
+        android:id="@+id/news_title"
+        xmlns:title="http://schemas.android.com/apk/res/com.lsl.graduation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        title:res_left_btn="@drawable/back_pressed"
+        title:text="新闻详情"></com.lsl.graduation.widget.Title>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_6"></View>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_e">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/new_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textColor="@color/color_3"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/new_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/new_title"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textColor="@color/color_6"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/new_img"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_below="@+id/new_time"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:src="@mipmap/default_image" />
+
+            <com.lsl.graduation.widget.htmltext.HtmlTextView
+                android:id="@+id/wb_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_below="@+id/new_img"
+                android:visibility="visible"
+                android:textSize="16sp"
+                android:textColor="@color/item_title"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/img_count"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/new_img"
+                android:layout_alignLeft="@+id/new_img"
+                android:visibility="gone"
+                android:gravity="center"
+                android:background="@mipmap/bg_master"
+                android:textColor="@color/white" />
+
+             <!--<com.lsl.graduation.widget.ProgressPieView-->
+                <!--android:id="@+id/progressPieView"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_alignTop="@+id/new_img"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:text="0%"-->
+                <!--android:visibility="visible"-->
+                <!--android:layout_marginTop="85dp" />-->
+
+            <ImageView
+                android:id="@+id/play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/new_img"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:src="@mipmap/biz_special_news_cover"
+                android:layout_marginTop="85dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

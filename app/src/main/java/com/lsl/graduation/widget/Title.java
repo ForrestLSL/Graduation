@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class Title extends RelativeLayout{
     public TextView left;
     public TextView right;
     public TextView title;
+    private LinearLayout back;
     public Title(Context context) {
         super(context);
     }
@@ -34,7 +36,7 @@ public class Title extends RelativeLayout{
         TypedArray array=getContext().obtainStyledAttributes(attrs, R.styleable.Title);
         content = LayoutInflater.from(getContext()).inflate(R.layout.main_title, null);//obtain the layout
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, AppContext.deviceWidth / 7);// set the layoutParams
-        content.setBackgroundColor(Color.TRANSPARENT);//set the background color
+        content.setBackgroundColor(array.getColor(R.styleable.Title_back_color,Color.TRANSPARENT));//set the background color Color.TRANSPARENT
         addView(content, params);//add the title into the RelativeLayout
         //set the attribute
         left= (TextView) findViewById(R.id.tv_left);

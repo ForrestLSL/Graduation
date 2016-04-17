@@ -10,6 +10,7 @@
         <attr name="text_right" format="string|reference"></attr>
         <attr name="text_margin_left" format="dimension|reference"></attr>
         <attr name="text_margin_right" format="dimension|reference"></attr>
+        <attr name="back_color" format="color"></attr>
     </declare-styleable>
     <!--WaterDropListVie属性设置w-->
     <declare-styleable name="WaterDropView">
@@ -20,5 +21,26 @@
         <attr name="topcircle_y" format="dimension"/>
         <attr name="bottomcircle_x" format="dimension"/>
         <attr name="bottomcircle_y" format="dimension"/>
+    </declare-styleable>
+    <!-- 进度条属性-->
+    <declare-styleable name="ProgressPieView">
+        <attr name="progress1" format="integer"/>
+        <attr name="max1" format="integer"/>
+        <attr name="startAngle" format="integer"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="backgroundColor" format="reference|color"/>
+        <attr name="progressColor1" format="reference|color"/>
+        <attr name="strokeColor" format="reference|color"/>
+        <attr name="showStroke" format="boolean"/>
+        <attr name="isShowText" format="boolean"/>
+        <attr name="typeface" format="string"/>
+        <attr name="image" format="reference"/>
+        <attr name="android:text"/>
+        <attr name="android:textSize"/>
+        <attr name="android:textColor"/>
+        <attr name="progressFillType" format="enum" >
+            <enum name="radial" value="0"/>
+            <enum name="center" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>

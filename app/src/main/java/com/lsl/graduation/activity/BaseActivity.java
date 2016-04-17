@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.lsl.graduation.AppManager;
+import com.lsl.graduation.Url;
 import com.lsl.graduation.utils.DialogUtils;
 
 /**
@@ -114,5 +115,9 @@ public class BaseActivity extends AppCompatActivity{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String getUrl(String newId) {
+        return Url.NewDetail + newId + Url.endDetailUrl;
     }
 }

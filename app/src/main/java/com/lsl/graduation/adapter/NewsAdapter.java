@@ -1,6 +1,7 @@
 package com.lsl.graduation.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lsl.graduation.R;
+import com.lsl.graduation.activity.ImageDetailActivity;
+import com.lsl.graduation.activity.NewsDetailActivity;
 import com.lsl.graduation.bean.NewModle;
 import com.lsl.graduation.net.context.BitmapContext;
 import com.lsl.graduation.utils.UIHelper;
@@ -65,6 +68,12 @@ public class NewsAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
 //        NewsItem newsItem;
+//        if (convertView==null){
+//            newsItem=new NewsItem(context);
+//
+//        }else {
+//            newsItem= (NewsItem) convertView;
+//        }
         if (convertView==null){
             convertView= LayoutInflater.from(context).inflate(R.layout.news_item,null);
             holder=new ViewHolder();
@@ -78,13 +87,11 @@ public class NewsAdapter extends BaseAdapter{
             holder.mImage2= (ImageView) convertView.findViewById(R.id.item_image_2);
             holder.mLinearText= (LinearLayout) convertView.findViewById(R.id.linear_text);
             holder.mLinearImage= (LinearLayout) convertView.findViewById(R.id.linear_image);
-//            newsItem=new NewsItem(context);
         }else {
-//            newsItem= (NewsItem) convertView;
             holder= (ViewHolder) convertView.getTag();
         }
 
-        NewModle newModle = lists.get(position);
+        final NewModle newModle = lists.get(position);
         if (newModle.getImagesModle() == null){
             holder.mLinearText.setVisibility(View.VISIBLE);
             holder.mLinearImage.setVisibility(View.GONE);
@@ -103,7 +110,6 @@ public class NewsAdapter extends BaseAdapter{
                         .defaultImage(
                                 context.getResources().getDrawable(
                                         R.mipmap.default_image)).load();
-//            imageLoader.displayImage(imgUrl, leftImage, options);
             } else {
                 holder. mImageText.setVisibility(View.GONE);
             }
@@ -116,30 +122,41 @@ public class NewsAdapter extends BaseAdapter{
                     .get(imageModle.get(0))
                     .ImageView( holder.mImage0)
                     .flag(BitmapContext.FLAG_CACHE_FIRST)
-                    .defaultImage(
-                            context.getResources().getDrawable(
-                                    R.mipmap.default_image)).load();
+                    .defaultImage(context.getResources().getDrawable(R.mipmap.default_image)).load();
             new BitmapContext()
                     .get(imageModle.get(1))
                     .ImageView( holder.mImage1)
                     .flag(BitmapContext.FLAG_CACHE_FIRST)
-                    .defaultImage(
-                            context.getResources().getDrawable(
-                                    R.mipmap.default_image)).load();
+                    .defaultImage(context.getResources().getDrawable(R.mipmap.default_image)).load();
             new BitmapContext()
                     .get(imageModle.get(2))
                     .ImageView( holder.mImage2)
                     .flag(BitmapContext.FLAG_CACHE_FIRST)
-                    .defaultImage(
-                            context.getResources().getDrawable(
-                                    R.mipmap.default_image)).load();
+                    .defaultImage(context.getResources().getDrawable(R.mipmap.default_image)).load();
         }
+
+//
 //        if (newModle.getImagesModle() == null) {
 //            newsItem.setTexts(context,newModle.getTitle(), newModle.getDigest(),
 //                    newModle.getImgsrc(), currentItem);
 //        } else {
 //            newsItem.setImages(context,newModle);
 //        }
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.putExtra("newModle", newModle);
+                Class<?> class1 = null;
+                if (newModle.getImagesModle() != null && newModle.getImagesModle().getImgList().size() > 1) {
+                    class1 = ImageDetailActivity.class;
+                } else {
+                    class1 = NewsDetailActivity.class;
+                }
+                intent.setClass(context,class1);
+               context.startActivity(intent);
+            }
+        });
         return convertView;
     }
 

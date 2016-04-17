@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 import com.lsl.graduation.R;
@@ -30,11 +31,17 @@ import java.util.List;
  * Created by Forrest on 16/4/14.
  */
 public class HeadFragment extends BaseFragment implements WaterDropListView.IWaterDropListViewListener {
+    /** 列表*/
     private WaterDropListView water_list;
     private HeaderView headerView;
+    /** 数据*/
     private List<NewModle> datas;
+    /** 页数*/
     private int index = 0;
+    /** 适配器*/
     private NewsAdapter mAdapter;
+    /** 刷新标志*/
+    private boolean isRefresh = false;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,33 +52,32 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
         water_list.setAdapter(mAdapter);
         water_list.setWaterDropListViewListener(this);
         water_list.setPullLoadEnable(true);
-        initData();
-
-
-
+        initData(index);
         datas=new ArrayList<>();
 //        headerView=new HeaderView(getActivity(),datas);
         return view;
 
     }
 
-    private void initData() {
+    private void initData(final int page) {
         getMyActivity().showDialog();
-        new StringContext().flag(LoadContext.FLAG_HTTP_FIRST).get(getNewUrl(index + ""))
+        new StringContext().flag(LoadContext.FLAG_HTTP_FIRST).get(getNewUrl(page + ""))
                 .listener(new SimpleLoadListener<String>() {
                     @Override
                     public void loadComplete(LoadContext<String> context) {
                         super.loadComplete(context);
                         getMyActivity().dismissDialog();
                         getResult(context.getResult());
-//                        JSONObject response;
-//                        try {
-//                            response = new JSONObject(context.getResult());
-//                            String total=response.getString("total");
-//                            UIHelper.showMsg(getMyActivity(), total);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
+
+                    }
+
+                    @Override
+                    public void loadFail(LoadContext<String> context) {
+                        super.loadFail(context);
+                        getMyActivity().dismissDialog();
+                        if (page != 0) {
+                            index -= 20;
+                        }
                     }
                 }).load();
 
@@ -80,20 +86,32 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
         List<NewModle> list =
                 NewListJson.instance(getActivity()).readJsonNewModles(result,
                         Url.TopId);
-        mAdapter.clear();
+        if (isRefresh){
+            isRefresh=false;
+            mAdapter.clear();
+            datas.clear();
+
+        }
         datas.addAll(list);
         mAdapter.appendList(datas);
-//        UIHelper.showMsg(getMyActivity(),list.get(0).getTitle());
 
+//        UIHelper.showMsg(getMyActivity(),list.get(0).getTitle());
     }
+
+
 
     @Override
     public void onRefresh() {
-
+        isRefresh = true;
+        index=0;
+        initData(index);
+        water_list.stopRefresh();
     }
 
     @Override
     public void onLoadMore() {
-
+        index = index + 20;
+        initData(index);
+        water_list.stopLoadMore();
     }
 }

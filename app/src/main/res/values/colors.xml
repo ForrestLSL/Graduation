@@ -7,8 +7,9 @@
     <color name="color_6">#666666</color>
     <color name="color_9">#999999</color>
     <color name="color_e">#eeeeee</color>
-
-
+    <color name="color_0">#00000000</color>
+    <color name="transparent">#00000000</color><!--透明  -->
+    <color name="helf_transparent">#22000000</color><!--半透明  -->
     <color name="white">#FFFFFF</color><!--白色 -->
     <color name="ivory">#FFFFF0</color><!--象牙色 -->
     <color name="lightyellow">#FFFFE0</color><!--亮黄色-->
@@ -154,7 +155,7 @@
     <color name="mediumblue">#0000CD</color><!--中兰色 -->
     <color name="darkblue">#00008B</color><!--暗蓝色 -->
     <color name="navy">#000080</color><!--海军色 -->
-    <color name="black">#645e59</color><!--灰色 -->
+    <color name="black">#000000</color><!--灰色 -->
     <color name="trans_pink">#fde5e0</color><!--粉色 -->
     <color name="orange_text">#fe7b5d</color><!--橘黄色 -->
 </resources>
