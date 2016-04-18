@@ -59,9 +59,8 @@ public class LunTanFragment extends BaseFragment implements WaterDropListView.IW
                     @Override
                     public void loadComplete(LoadContext<String> context) {
                         super.loadComplete(context);
-                        getMyActivity().dismissDialog();
                         getResult(context.getResult());
-
+                        getMyActivity().dismissDialog();
                     }
 
                     @Override

@@ -59,8 +59,8 @@ public class JingXuanFragment extends BaseFragment implements WaterDropListView.
                     @Override
                     public void loadComplete(LoadContext<String> context) {
                         super.loadComplete(context);
-                        getMyActivity().dismissDialog();
                         getResult(context.getResult());
+                        getMyActivity().dismissDialog();
 
                     }
 

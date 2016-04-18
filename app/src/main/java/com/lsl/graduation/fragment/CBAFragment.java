@@ -59,8 +59,8 @@ public class CBAFragment extends BaseFragment implements WaterDropListView.IWate
                     @Override
                     public void loadComplete(LoadContext<String> context) {
                         super.loadComplete(context);
-                        getMyActivity().dismissDialog();
                         getResult(context.getResult());
+                        getMyActivity().dismissDialog();
 
                     }
 
