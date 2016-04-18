@@ -25,4 +25,8 @@ public class Configs {
     public final static int CONNECTION_TIMEOUT = 15 * 1000;
     /** SO连接超时*/
     public final static int SO_TIMEOUT = 15 * 1000;
+    /** SO连接超时*/
+    public final static int REQUEST_CODE = 0x12;
+    /** SO连接超时*/
+    public final static int RESULT_CODE = 0x13;
 }

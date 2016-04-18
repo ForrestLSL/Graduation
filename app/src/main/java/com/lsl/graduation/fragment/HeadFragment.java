@@ -90,10 +90,7 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
             datas.clear();
 
         }
-//        datas.addAll(list);
         mAdapter.appendList(list);
-
-//        UIHelper.showMsg(getMyActivity(),list.get(0).getTitle());
     }
 
 

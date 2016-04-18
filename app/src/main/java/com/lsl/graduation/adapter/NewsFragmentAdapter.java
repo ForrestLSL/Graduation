@@ -3,6 +3,7 @@ package com.lsl.graduation.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.view.ViewGroup;
 
@@ -12,18 +13,14 @@ import java.util.ArrayList;
  * 新闻类的Fragment的Adapter
  * Created by Forrest on 16/4/13.
  */
-public class NewsFragmentAdapter extends FragmentPagerAdapter{
+public class NewsFragmentAdapter extends FragmentStatePagerAdapter {
     private ArrayList<Fragment> fragments=new ArrayList<Fragment>();
     private final FragmentManager fm;
     public NewsFragmentAdapter(FragmentManager fm) {
         super(fm);
         this.fm=fm;
     }
-    public NewsFragmentAdapter(FragmentManager fm,ArrayList<Fragment> fragments){
-        super(fm);
-        this.fm=fm;
-        this.fragments=fragments;
-    }
+
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);
@@ -38,6 +35,9 @@ public class NewsFragmentAdapter extends FragmentPagerAdapter{
     public int getItemPosition(Object object) {
         return POSITION_NONE;
 
+    }
+    public void clear(){
+        fragments.clear();
     }
     public void appendList(ArrayList<Fragment> fragment) {
         fragments.clear();

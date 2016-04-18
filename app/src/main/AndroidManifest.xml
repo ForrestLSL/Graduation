@@ -56,6 +56,7 @@
         <activity android:name=".activity.NewsDetailActivity" android:theme="@style/RiLo_CustomTheme" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ImageDetailActivity" android:theme="@style/RiLo_CustomTheme" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.VideoPlayActivity" android:theme="@style/RiLo_CustomTheme" android:launchMode="singleTask" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.ChannelActivity" android:theme="@style/RiLo_CustomTheme" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

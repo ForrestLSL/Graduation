@@ -89,18 +89,23 @@ public class ChannelDao implements ChannelDaoInface {
 
     @Override
     public boolean updateCache(ContentValues values, String whereClause, String[] whereArgs) {
-        boolean flag=false;
-        SQLiteDatabase database=null;
-        int count=0;
+
+
+        boolean flag = false;
+        SQLiteDatabase database = null;
+        int count = 0;
         try {
-            database=sqlHelper.getWritableDatabase();
-//            count=database.update(SQLHelper.TABLE_CHANNEL,values,whereClause,whereArgs);
-            database.execSQL("update"+SQLHelper.TABLE_CHANNEL+"set selected="+values.getAsString("selected")+"where id="+values.getAsString("id"));
-            flag=(count>0?true:false);
-        }catch (Exception e){
+            database = sqlHelper.getWritableDatabase();
+            database.beginTransaction();
+            // count = database.update(SQLHelper.TABLE_CHANNEL, values,
+            // whereClause, whereArgs);
+            database.execSQL("update " + SQLHelper.TABLE_CHANNEL + " set selected = "
+                    + values.getAsString("selected") + " where id = " + values.getAsString("id"));
+            flag = (count > 0 ? true : false);
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if (database!=null){
+        } finally {
+            if (database != null) {
                 database.endTransaction();
                 database.close();
             }

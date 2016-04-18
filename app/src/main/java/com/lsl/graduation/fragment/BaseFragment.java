@@ -50,10 +50,10 @@ public class BaseFragment extends Fragment{
         return urlString;
     }
 
-    public String getReDianPicsUrl(String index) {
-        String urlString = Url.TuPianReDian + index + Url.TuJiEnd;
-        return urlString;
-    }
+//    public String getReDianPicsUrl(String index) {
+//        String urlString = Url.TuPianReDian + index + Url.TuJiEnd;
+//        return urlString;
+//    }
 
     public String getDuJiaPicsUrl(String index) {
         String urlString = Url.TuPianDuJia + index + Url.TuJiEnd;

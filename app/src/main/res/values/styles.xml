@@ -35,9 +35,13 @@
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_margin">@dimen/dp3</item>
     </style>
-    <!-- 右进左出的Style-->
+    <!-- 右进左出的Style  Theme.AppCompat.Light.NoActionBar-->
     <style name="RiLo_CustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/activity_act</item>
+        <!--&lt;!&ndash; Status Bar &ndash;&gt;-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--&lt;!&ndash; Navigation Bar &ndash;&gt;-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
     <style name="activity_act" parent="@android:style/Animation.Activity">

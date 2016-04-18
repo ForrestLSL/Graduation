@@ -1,5 +1,6 @@
 package com.lsl.graduation.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -57,6 +58,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private LinearLayout linearDrawer;
     /** 标题*/
     private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         initView();
         changeFragment(NewsFragment.class.getName());
         selectItem(0);
+
     }
 
     private void initView() {
@@ -182,7 +185,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
      * @param name
      */
     private void changeFragment(String name) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager  fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
         Fragment nowFragment = fragmentManager
@@ -229,4 +232,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        FragmentManager  fragmentManager = getSupportFragmentManager();
+        Fragment f = fragmentManager.findFragmentByTag(nowFragmentName);
+        f.onActivityResult(requestCode, resultCode, data);
+
+    }
 }
