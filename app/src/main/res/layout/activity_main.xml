@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        title:res_left_btn="@mipmap/title_left_back"
+        title:res_left_btn="@mipmap/menu"
         title:text="News">
 
     </com.lsl.graduation.widget.Title>

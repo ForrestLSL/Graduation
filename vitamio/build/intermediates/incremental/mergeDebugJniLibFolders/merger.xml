@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/macbook/Desktop/Demo/Graduation/vitamio/libs"><file name="armeabi/libvinit.so" path="/Users/macbook/Desktop/Demo/Graduation/vitamio/libs/armeabi/libvinit.so"/><file name="armeabi-v7a/libvinit.so" path="/Users/macbook/Desktop/Demo/Graduation/vitamio/libs/armeabi-v7a/libvinit.so"/></source></dataSet><dataSet config="debug"><source path="/Users/macbook/Desktop/Demo/Graduation/vitamio/build-types/debug/jniLibs"/></dataSet></merger>

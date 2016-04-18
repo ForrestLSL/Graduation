@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -58,6 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private LinearLayout linearDrawer;
     /** 标题*/
     private TextView title;
+    private View menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initView() {
-        findViewById(R.id.linear_left).setOnClickListener(this);
+        menu= findViewById(R.id.linear_left);
+        menu.setOnClickListener(this);
         title= ((Title) findViewById(R.id.title)).title;//((HqTitle) findViewById(R.id.title)).title;
         drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
         linearDrawer= (LinearLayout) findViewById(R.id.linearDrawer);
@@ -78,10 +81,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         leftDrawerListView= (ListView) findViewById(R.id.leftDrawerListView);
         // load data
         navigationItems = new ArrayList<>();
-        navigationItems.add(new NavigationDrawerItem("News", true));
-        navigationItems.add(new NavigationDrawerItem("Video", true));
-        navigationItems.add(new NavigationDrawerItem("Three",true));
-        navigationItems.add(new NavigationDrawerItem("Four", true));
+        navigationItems.add(new NavigationDrawerItem("新闻", true));
+        navigationItems.add(new NavigationDrawerItem("图片", true));
+        navigationItems.add(new NavigationDrawerItem("视频",true));
+        navigationItems.add(new NavigationDrawerItem("其他", true));
         navigationDrawerList.replaceWith(navigationItems);
         //add the List ItemClickListener
         leftDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -169,6 +172,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.linear_left:
+                RotateAnimation animation=new RotateAnimation(0,180,menu.getWidth()/2,menu.getHeight()/2);
+                animation.setDuration(1000);
+                menu.startAnimation(animation);
                 if (IsShow){
                     drawerLayout.openDrawer(linearDrawer);
                 }else {
