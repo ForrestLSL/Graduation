@@ -16,7 +16,9 @@ import android.widget.TextView;
 
 import com.lsl.graduation.R;
 import com.lsl.graduation.fragment.NewsFragment;
+import com.lsl.graduation.fragment.OtherFragment;
 import com.lsl.graduation.fragment.PictureFragment;
+import com.lsl.graduation.fragment.VideoFragment;
 import com.lsl.graduation.net.context.LoadContext;
 import com.lsl.graduation.net.context.StringContext;
 import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
@@ -84,6 +86,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         changeFragment(NewsFragment.class.getName());
                     }else if (position==1){
                         changeFragment(PictureFragment.class.getName());
+                    }else if (position==2){
+                        changeFragment(VideoFragment.class.getName());
+                    }else if (position==3){
+                        changeFragment(OtherFragment.class.getName());
                     }
                     selectItem(position);
                 }
@@ -130,30 +136,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         if (linearDrawer != null) {
             drawerLayout.closeDrawer(linearDrawer);
         }
-    }
-
-    private void getHoSaVenue(){
-        showDialog();
-        new StringContext().flag(LoadContext.FLAG_HTTP_FIRST).post("http://123.56.162.207:8093/hosapro/hsvenue/findPageVenue")
-                .param("rows", "10")
-                .param("page","1")
-                .param("xzb","116.403875")
-                .param("yzb","39.915168")
-                .listener(new SimpleLoadListener<String>() {
-                    @Override
-                    public void loadComplete(LoadContext<String> context) {
-                        super.loadComplete(context);
-                        dismissDialog();
-                        JSONObject response;
-                        try {
-                            response = new JSONObject(context.getResult());
-                            String total=response.getString("total");
-                            UIHelper.showMsg(MainActivity.this,total);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).load();
     }
 
     @Override

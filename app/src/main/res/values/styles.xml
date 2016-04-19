@@ -58,4 +58,15 @@
         <item name="@android:activityCloseExitAnimation">@anim/right_go_out</item>
     </style>
     <style name="AppBase" parent="RiLo_CustomTheme"></style>
+
+    <!-- 自定义的Linear点击效果，false白色，true浅灰色，无边框 Horizontal-->
+    <style name="linear_normal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:minHeight">@dimen/dp50</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/layout_click_white</item>
+        <item name="android:clickable">true</item>
+    </style>
 </resources>
