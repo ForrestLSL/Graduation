@@ -5,24 +5,17 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
-import android.widget.TextView;
 
 import com.lsl.graduation.R;
 import com.lsl.graduation.Url;
 import com.lsl.graduation.adapter.NewsAdapter;
-import com.lsl.graduation.bean.NewModle;
+import com.lsl.graduation.bean.NewsModel;
 import com.lsl.graduation.json.NewListJson;
 import com.lsl.graduation.net.context.LoadContext;
 import com.lsl.graduation.net.context.StringContext;
 import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
-import com.lsl.graduation.utils.MLog;
-import com.lsl.graduation.utils.UIHelper;
 import com.lsl.graduation.widget.HeaderView;
 import com.lsl.graduation.widget.water.WaterDropListView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +28,7 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
     private WaterDropListView water_list;
     private HeaderView headerView;
     /** 数据*/
-    private List<NewModle> datas;
+    private List<NewsModel> datas;
     /** 页数*/
     private int index = 0;
     /** 适配器*/
@@ -47,7 +40,7 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment,null);
         water_list= (WaterDropListView) view.findViewById(R.id.water_list);
-        datas=new ArrayList<NewModle>();
+        datas=new ArrayList<NewsModel>();
         mAdapter=new NewsAdapter(getMyActivity(),datas);
         water_list.setAdapter(mAdapter);
         water_list.setWaterDropListViewListener(this);
@@ -81,7 +74,7 @@ public class HeadFragment extends BaseFragment implements WaterDropListView.IWat
 
     }
     public void getResult(String result) {
-        List<NewModle> list =
+        List<NewsModel> list =
                 NewListJson.instance(getActivity()).readJsonNewModles(result,
                         Url.TopId);
         if (isRefresh){

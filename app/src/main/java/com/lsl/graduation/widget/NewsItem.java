@@ -9,10 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lsl.graduation.R;
-import com.lsl.graduation.bean.NewModle;
+import com.lsl.graduation.bean.NewsModel;
 import com.lsl.graduation.net.context.BitmapContext;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.List;
 
@@ -80,7 +78,7 @@ public class NewsItem extends LinearLayout{
         }
     }
 
-    public void setImages(Context context,NewModle newModle) {
+    public void setImages(Context context,NewsModel newModle) {
         mLinearImage.setVisibility(View.VISIBLE);
         mLinearText.setVisibility(View.GONE);
         mImageTitle.setText(newModle.getTitle());

@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.lsl.graduation.AppManager;
+import com.lsl.graduation.R;
 import com.lsl.graduation.Url;
 import com.lsl.graduation.utils.DialogUtils;
 

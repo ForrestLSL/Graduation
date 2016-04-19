@@ -38,7 +38,11 @@
     <!-- 右进左出的Style  Theme.AppCompat.Light.NoActionBar-->
     <style name="RiLo_CustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/activity_act</item>
-        <!--&lt;!&ndash; Status Bar &ndash;&gt;-->
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/color_e</item>
+        <!--<item name="android:textColorPrimary">#fff</item>-->
+        <!-- Status Bar -->
         <!--<item name="android:windowTranslucentStatus">true</item>-->
         <!--&lt;!&ndash; Navigation Bar &ndash;&gt;-->
         <!--<item name="android:windowTranslucentNavigation">true</item>-->
@@ -53,5 +57,5 @@
 
         <item name="@android:activityCloseExitAnimation">@anim/right_go_out</item>
     </style>
-
+    <style name="AppBase" parent="RiLo_CustomTheme"></style>
 </resources>

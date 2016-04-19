@@ -16,6 +16,11 @@
 
         <corners android:radius="2.0dip" />
     </shape></item>
+    <item android:state_checked="true"><shape>
+        <gradient android:angle="270.0" android:endColor="@color/royalblue" android:startColor="@color/royalblue" />
+
+        <corners android:radius="2.0dip" />
+    </shape></item>
     <item><shape>
         <gradient android:angle="270.0" android:endColor="#00000000" android:startColor="#00000000" />
 

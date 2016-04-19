@@ -57,8 +57,8 @@ public class AppContext extends Application {
     }
     /** 初始化ImageLoader */
     public static void initImageLoader(Context context) {
-        String filePath = Environment.getExternalStorageDirectory() +
-                 context.getPackageName() + "/cache/";
+        String filePath =
+                "/Android/data/"+context.getPackageName() + "/cache/";//Environment.getExternalStorageDirectory() +
 
         File cacheDir = StorageUtils.getOwnCacheDirectory(context, filePath);// 获取到缓存的目录地址
         Log.d("cacheDir", cacheDir.getPath());

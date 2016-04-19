@@ -21,6 +21,12 @@ public class NewsFragmentAdapter extends FragmentStatePagerAdapter {
         this.fm=fm;
     }
 
+    public NewsFragmentAdapter(FragmentManager fm,  ArrayList<Fragment> fragments) {
+        super(fm);
+        this.fm = fm;
+        this.fragments = fragments;
+    }
+
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);

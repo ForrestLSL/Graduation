@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.lsl.graduation.R;
 import com.lsl.graduation.Url;
 import com.lsl.graduation.adapter.NewsAdapter;
-import com.lsl.graduation.bean.NewModle;
+import com.lsl.graduation.bean.NewsModel;
 import com.lsl.graduation.json.NewListJson;
 import com.lsl.graduation.net.context.LoadContext;
 import com.lsl.graduation.net.context.StringContext;
@@ -28,7 +28,7 @@ public class CaiJingFragment extends BaseFragment implements WaterDropListView.I
     private WaterDropListView water_list;
     private HeaderView headerView;
     /** 数据*/
-    private List<NewModle> datas;
+    private List<NewsModel> datas;
     /** 页数*/
     private int index = 0;
     /** 适配器*/
@@ -40,7 +40,7 @@ public class CaiJingFragment extends BaseFragment implements WaterDropListView.I
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment,null);
         water_list= (WaterDropListView) view.findViewById(R.id.water_list);
-        datas=new ArrayList<NewModle>();
+        datas=new ArrayList<NewsModel>();
         mAdapter=new NewsAdapter(getMyActivity(),datas);
         water_list.setAdapter(mAdapter);
         water_list.setWaterDropListViewListener(this);
@@ -73,7 +73,7 @@ public class CaiJingFragment extends BaseFragment implements WaterDropListView.I
 
     }
     public void getResult(String result) {
-        List<NewModle> list =
+        List<NewsModel> list =
                 NewListJson.instance(getActivity()).readJsonNewModles(result,
                         Url.CaiJingId);
         if (isRefresh){

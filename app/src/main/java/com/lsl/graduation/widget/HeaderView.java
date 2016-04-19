@@ -14,16 +14,13 @@ import android.widget.RadioGroup;
 import android.widget.Scroller;
 
 import com.lsl.graduation.R;
-import com.lsl.graduation.bean.NewModle;
+import com.lsl.graduation.bean.NewsModel;
 import com.lsl.graduation.net.context.BitmapContext;
-import com.lsl.graduation.utils.DeviceUtils;
 import com.lsl.graduation.utils.UIHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 /**
  * Created by Forrest on 16/4/14.
@@ -32,22 +29,22 @@ public class HeaderView extends View{
     private ViewPager ImagerPager;
     private ViewPager TextPager;
     private RadioGroup group;
-    private List<NewModle> datas;
+    private List<NewsModel> datas;
     private PagerAdapter mAdapter;
     private List<ImageView> viewList = new ArrayList<ImageView>();
 
-    public HeaderView(Context context,List<NewModle> datas) {
+    public HeaderView(Context context,List<NewsModel> datas) {
         super(context);
         this.datas=datas;
         initView(context);
 
     }
-    public HeaderView(Context context, AttributeSet attrs,List<NewModle> datas) {
+    public HeaderView(Context context, AttributeSet attrs,List<NewsModel> datas) {
         super(context, attrs);
         this.datas=datas;
         initView(context);
     }
-    public HeaderView(Context context, AttributeSet attrs, int defStyleAttr,List<NewModle> datas) {
+    public HeaderView(Context context, AttributeSet attrs, int defStyleAttr,List<NewsModel> datas) {
         super(context, attrs, defStyleAttr);
         this.datas=datas;
         initView(context);
@@ -67,7 +64,7 @@ public class HeaderView extends View{
 
     private void initViewPager(final Context context) {
         viewList.clear();
-        for (NewModle news:datas) {
+        for (NewsModel news:datas) {
             creatItemView(context,news);
             createDot(context);
         }
@@ -88,7 +85,7 @@ public class HeaderView extends View{
             public Object instantiateItem(View container, int position) {
                 ImageView view = viewList.get(position % viewList.size());
                 new BitmapContext()
-                        .get(((NewModle) view.getTag()).getImgsrc())
+                        .get(((NewsModel) view.getTag()).getImgsrc())
                         .ImageView(view)
                         .flag(BitmapContext.FLAG_CACHE_FIRST)
                         .defaultImage(
@@ -184,7 +181,7 @@ public class HeaderView extends View{
      * @param context
      * @param newModel
      */
-    private void creatItemView(final Context context,NewModle newModel) {
+    private void creatItemView(final Context context,NewsModel newModel) {
         ImageView itemView = new ImageView(context);
         itemView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         itemView.setImageResource(R.mipmap.default_image);

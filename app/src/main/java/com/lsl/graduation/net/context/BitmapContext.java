@@ -163,6 +163,7 @@ public class BitmapContext extends LoadContext<Bitmap> {
 		.cacheInMemory(true)
 		.cacheOnDisk(true)
 		.considerExifParams(true)
+		.bitmapConfig(Bitmap.Config.RGB_565)
 		.displayer(new SimpleBitmapDisplayer())
 		.build();
 		ImageLoader.getInstance().displayImage(url, imageView, options, displayListener);

@@ -1,48 +1,36 @@
 package com.lsl.graduation.activity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.lsl.graduation.Configs;
 import com.lsl.graduation.R;
 import com.lsl.graduation.fragment.NewsFragment;
-import com.lsl.graduation.fragment.VideoFragment;
+import com.lsl.graduation.fragment.PictureFragment;
 import com.lsl.graduation.net.context.LoadContext;
 import com.lsl.graduation.net.context.StringContext;
 import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
-import com.lsl.graduation.net.http.HttpManager;
 import com.lsl.graduation.utils.ReflectUtil;
 import com.lsl.graduation.utils.UIHelper;
 import com.lsl.graduation.widget.Title;
 import com.lsl.graduation.widget.slide.NavigationDrawerItem;
 import com.lsl.graduation.widget.slide.NavigationDrawerView;
 
-import org.apache.http.HttpResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.transform.Result;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
     /**  侧滑菜单控件*/
@@ -95,7 +83,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     if (position==0){
                         changeFragment(NewsFragment.class.getName());
                     }else if (position==1){
-                        changeFragment(VideoFragment.class.getName());
+                        changeFragment(PictureFragment.class.getName());
                     }
                     selectItem(position);
                 }

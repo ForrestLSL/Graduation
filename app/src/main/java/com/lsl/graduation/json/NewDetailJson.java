@@ -4,7 +4,7 @@ package com.lsl.graduation.json;
 import android.content.Context;
 
 
-import com.lsl.graduation.bean.NewDetailModle;
+import com.lsl.graduation.bean.NewsDetailModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,7 +16,7 @@ public class NewDetailJson extends JsonPacket {
 
     public static NewDetailJson newDetailJson;
 
-    public NewDetailModle newDetailModle;
+    public NewsDetailModel newDetailModle;
 
     public NewDetailJson(Context context) {
         super(context);
@@ -29,7 +29,7 @@ public class NewDetailJson extends JsonPacket {
         return newDetailJson;
     }
 
-    public NewDetailModle readJsonNewModles(String res, String newId) {
+    public NewsDetailModel readJsonNewModles(String res, String newId) {
         try {
             if (res == null || res.equals("")) {
                 return null;
@@ -68,8 +68,8 @@ public class NewDetailJson extends JsonPacket {
      * @return
      * @throws Exception
      */
-    public NewDetailModle readNewModle(JSONObject jsonObject) throws Exception {
-        NewDetailModle newDetailModle = null;
+    public NewsDetailModel readNewModle(JSONObject jsonObject) throws Exception {
+        NewsDetailModel newDetailModle = null;
 
         String docid = "";
         String title = "";
@@ -95,7 +95,7 @@ public class NewDetailJson extends JsonPacket {
 
         List<String> imgList = readImgList(jsonArray);
 
-        newDetailModle = new NewDetailModle();
+        newDetailModle = new NewsDetailModel();
 
         newDetailModle.setDocid(docid);
         newDetailModle.setImgList(imgList);

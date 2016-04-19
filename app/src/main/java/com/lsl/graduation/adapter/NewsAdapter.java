@@ -13,10 +13,8 @@ import android.widget.TextView;
 import com.lsl.graduation.R;
 import com.lsl.graduation.activity.ImageDetailActivity;
 import com.lsl.graduation.activity.NewsDetailActivity;
-import com.lsl.graduation.bean.NewModle;
+import com.lsl.graduation.bean.NewsModel;
 import com.lsl.graduation.net.context.BitmapContext;
-import com.lsl.graduation.utils.UIHelper;
-import com.lsl.graduation.widget.NewsItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +23,18 @@ import java.util.List;
  * Created by Forrest on 16/4/15.
  */
 public class NewsAdapter extends BaseAdapter{
-    public List<NewModle> lists = new ArrayList<NewModle>();
+    public List<NewsModel> lists = new ArrayList<NewsModel>();
     private Context context;
     private String currentItem;
 
-    public void appendList(List<NewModle> list) {
+    public void appendList(List<NewsModel> list) {
         if (!lists.containsAll(list) && list != null && list.size() > 0) {
             lists.addAll(list);
         }
         notifyDataSetChanged();
     }
 
-    public NewsAdapter(Context context,List<NewModle> data){
+    public NewsAdapter(Context context,List<NewsModel> data){
         this.lists=data;
         this.context=context;
     }
@@ -91,7 +89,7 @@ public class NewsAdapter extends BaseAdapter{
             holder= (ViewHolder) convertView.getTag();
         }
 
-        final NewModle newModle = lists.get(position);
+        final NewsModel newModle = lists.get(position);
         if (newModle.getImagesModle() == null){
             holder.mLinearText.setVisibility(View.VISIBLE);
             holder.mLinearImage.setVisibility(View.GONE);

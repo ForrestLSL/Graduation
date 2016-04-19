@@ -6,10 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lsl.graduation.AppContext;
 import com.lsl.graduation.R;
-import com.lsl.graduation.bean.NewDetailModle;
-import com.lsl.graduation.bean.NewModle;
+import com.lsl.graduation.bean.NewsDetailModel;
+import com.lsl.graduation.bean.NewsModel;
 import com.lsl.graduation.json.NewDetailJson;
 import com.lsl.graduation.net.context.BitmapContext;
 import com.lsl.graduation.net.context.LoadContext;
@@ -17,7 +16,6 @@ import com.lsl.graduation.net.context.StringContext;
 import com.lsl.graduation.net.loadlistener.SimpleLoadListener;
 import com.lsl.graduation.utils.StringUtils;
 import com.lsl.graduation.utils.UIHelper;
-import com.lsl.graduation.widget.ProgressPieView;
 import com.lsl.graduation.widget.htmltext.HtmlTextView;
 
 /**
@@ -39,16 +37,16 @@ public class NewsDetailActivity extends  BaseActivity implements View.OnClickLis
     /** 播放按钮*/
     protected ImageView play;
     private String newUrl;
-    private NewModle newModle;
+    private NewsModel newModle;
     private String newID;
     private String imgCountString;
-    private NewDetailModle newDetailModle;
+    private NewsDetailModel newDetailModle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.avtivity_news_detail);
         //得到前面传来的实体类
-        newModle = (NewModle) getIntent().getExtras().getSerializable("newModle");
+        newModle = (NewsModel) getIntent().getExtras().getSerializable("newModle");
         newID = newModle.getDocid();
         newUrl = getUrl(newID);
         initView();

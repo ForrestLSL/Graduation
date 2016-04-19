@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.lsl.graduation.R;
 import com.lsl.graduation.adapter.ImageDetailAdapter;
-import com.lsl.graduation.bean.NewDetailModle;
-import com.lsl.graduation.bean.NewModle;
+import com.lsl.graduation.bean.NewsDetailModel;
+import com.lsl.graduation.bean.NewsModel;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class ImageDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView new_title;
     private ViewPager image_viewpager;
     private List<String> imgList;
-    private NewDetailModle newDetailModle;
+    private NewsDetailModel newDetailModle;
     private String titleString;
-    private NewModle newModle;
+    private NewsModel newModle;
     private ImageDetailAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,13 @@ public class ImageDetailActivity extends BaseActivity implements View.OnClickLis
     public void init() {
         try {
             if (getIntent().getExtras().getSerializable("newDetailModle") != null) {
-                newDetailModle = (NewDetailModle) getIntent().getExtras().getSerializable(
+                newDetailModle = (NewsDetailModel) getIntent().getExtras().getSerializable(
                         "newDetailModle");
                 imgList = newDetailModle.getImgList();
                 titleString = newDetailModle.getTitle();
 
             } else {
-                newModle = (NewModle) getIntent().getExtras().getSerializable("newModle");
+                newModle = (NewsModel) getIntent().getExtras().getSerializable("newModle");
                 imgList = newModle.getImagesModle().getImgList();
                 titleString = newModle.getTitle();
             }
