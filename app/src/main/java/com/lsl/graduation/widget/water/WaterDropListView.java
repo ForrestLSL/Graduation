@@ -186,7 +186,7 @@ public class WaterDropListView extends ListView implements OnScrollListener,Wate
 				mHeaderView.updateState(WaterDropListViewHeader.STATE.stretch);
 			} else if(mHeaderView.getCurrentState() == WaterDropListViewHeader.STATE.stretch && height >= mHeaderView.getReadyHeight()){
 				//由stretch变成ready的逻辑：1、当前状态是stretch；2、下拉头达到了readyheight的高度
-				mHeaderView.updateState(WaterDropListViewHeader.STATE.ready);
+//				mHeaderView.updateState(WaterDropListViewHeader.STATE.ready);
 			}else if (mHeaderView.getCurrentState() == WaterDropListViewHeader.STATE.stretch && height < mHeaderView.getStretchHeight()){
 				// 由stretch变成normal的逻辑：1、当前状态是stretch；2、下拉头高度小于stretchheight的高度
 				mHeaderView.updateState(WaterDropListViewHeader.STATE.normal);
@@ -265,7 +265,7 @@ public class WaterDropListView extends ListView implements OnScrollListener,Wate
 			mListViewListener.onLoadMore();
 		}
 	}
-
+ 	private int newHeight =0;
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		if (mLastY == -1) {
@@ -283,14 +283,21 @@ public class WaterDropListView extends ListView implements OnScrollListener,Wate
 			if (getFirstVisiblePosition() == 0 && (mHeaderView.getVisiableHeight() > 0 || deltaY > 0)) {
 				// the first item is showing, header has shown or pull down.
 				updateHeaderHeight(deltaY / OFFSET_RADIO);
+				newHeight= (int) (deltaY / OFFSET_RADIO)+mHeaderView.getVisiableHeight();
 				invokeOnScrolling();
 			} else if (getLastVisiblePosition() == mTotalItemCount - 1 && (mFooterView.getBottomMargin() > 0 || deltaY < 0)) {
 				// last item, already pulled up or want to pull up.
 				updateFooterHeight(-deltaY / OFFSET_RADIO);
 			}
 			break;
+
 		default:
 			mLastY = -1; // reset
+
+			if (mHeaderView.getCurrentState() == WaterDropListViewHeader.STATE.stretch && newHeight >= mHeaderView.getReadyHeight()){
+				mHeaderView.updateState(WaterDropListViewHeader.STATE.ready);
+
+			}
 			isTouchingScreen = false;
 			//TODO 存在bug：当两个if的条件都满足的时候，只能滚动一个，所以在reSetHeader的时候就不起作用了，一般就只会reSetFooter
 			if (getFirstVisiblePosition() == 0) {
