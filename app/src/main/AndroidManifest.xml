@@ -13,23 +13,26 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!-- 获取账户-->
+    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS"/>-->
+    <!-- 唤醒闹钟-->
+    <!--<uses-permission android:name="android.permission.WAKE_LOCK" />-->
+    <!-- 打电话-->
+    <!--<uses-permission android:name="android.permission.CALL_PHONE"/>-->
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 发送短信-->
     <!-- <uses-permission android:name="android.permission.SEND_SMS" /> -->
     <!-- 阅读消息 -->
-    <uses-permission android:name="android.permission.READ_SMS" />
+    <!--<uses-permission android:name="android.permission.READ_SMS" />-->
     <!-- 写入消息 -->
     <!-- <uses-permission android:name="android.permission.WRITE_SMS" /> -->
     <!-- 接收消息 -->
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!--<uses-permission android:name="android.permission.RECEIVE_SMS" />-->
     <!-- 开启传感器 -->
-    <uses-permission android:name="android.hardware.sensor.accelerometer"/>
+    <!--<uses-permission android:name="android.hardware.sensor.accelerometer"/>-->
     <!-- 开启震动-->
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!--<uses-permission android:name="android.permission.VIBRATE"/>-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"

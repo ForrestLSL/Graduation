@@ -97,8 +97,8 @@ public class ChannelDao implements ChannelDaoInface {
         try {
             database = sqlHelper.getWritableDatabase();
             database.beginTransaction();
-            // count = database.update(SQLHelper.TABLE_CHANNEL, values,
-            // whereClause, whereArgs);
+//             count = database.update(SQLHelper.TABLE_CHANNEL, values,
+//             whereClause, whereArgs);
             database.execSQL("update " + SQLHelper.TABLE_CHANNEL + " set selected = "
                     + values.getAsString("selected") + " where id = " + values.getAsString("id"));
             flag = (count > 0 ? true : false);

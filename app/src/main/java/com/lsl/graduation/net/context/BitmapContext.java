@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
@@ -161,6 +162,7 @@ public class BitmapContext extends LoadContext<Bitmap> {
 		.showImageOnLoading(defaultImage)
 		.showImageOnFail(defaultImage)
 		.cacheInMemory(true)
+//		.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//设置图片以如何的编码方式显示
 		.cacheOnDisk(true)
 		.considerExifParams(true)
 		.bitmapConfig(Bitmap.Config.RGB_565)
